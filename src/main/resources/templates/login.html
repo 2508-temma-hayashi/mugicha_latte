@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+</head>
+<body>
+    <h1>ログイン</h1>
+
+    <!-- エラーメッセージの出る場所-->
+    <form method="post" action="login" th:object="${loginForm}">
+        <div>
+            <label>アカウント</label>
+            <input type="text" th:field="*{account}">
+        </div>
+        <div>
+            <label>パスワード</label>
+            <input type="password" th:field="*{password}">
+        </div>
+        <input type="submit" value="ログインする">
+    </form>
+</body>
+</html>
