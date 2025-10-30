@@ -11,6 +11,8 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView showHome(){
 
+        //ログインユーザーが総務人事部か確認
+
         ModelAndView mav = new ModelAndView("home");
         return mav;
     }
