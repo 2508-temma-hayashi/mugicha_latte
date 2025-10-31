@@ -2,7 +2,9 @@ package com.example.mugicha_latte.controller;
 
 import com.example.mugicha_latte.controller.form.MessageForm;
 import com.example.mugicha_latte.controller.form.MessageSearchForm;
+import com.example.mugicha_latte.repository.entity.Comment;
 import com.example.mugicha_latte.repository.entity.User;
+import com.example.mugicha_latte.service.CommentService;
 import com.example.mugicha_latte.service.MessageService;
 import jakarta.servlet.http.HttpSession;
 
@@ -18,7 +20,8 @@ import java.util.List;
 public class HomeController {
     @Autowired
     MessageService messageService;
-
+    @Autowired
+    CommentService commentService;
     @GetMapping("/home")
     public ModelAndView showHome(@ModelAttribute MessageSearchForm form, HttpSession session){
 
@@ -33,11 +36,15 @@ public class HomeController {
         //★開始日（LocalDate型）終了日（LocalDate型）とカテゴリの入ったformを渡して投稿取得するメソッド起動
         List<MessageForm> messageFormList = messageService.findAllMessage(form);
 
+        //コメント取得
+        List<Comment> commentList = commentService.findComment();
 
         //★HTMLに渡す
         ModelAndView mav = new ModelAndView("home");
         //投稿をmodelに詰める
         mav.addObject("messageFormList", messageFormList);
+        //コメントをhtmlに渡す
+        mav.addObject("commentList", commentList);
         //絞り込み入力値保持のためformもそのまま渡しておく
         mav.addObject("messageSearchForm", form);
         //本社所属の総務人事部ならON、そうでないならOFFの文字列も判別のために送る・
