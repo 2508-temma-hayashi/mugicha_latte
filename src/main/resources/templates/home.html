@@ -10,7 +10,7 @@
     <!--menu-->
     <div>
         <!--新規投稿画面へのリンク-->
-        <a th:href="@{/post]">新規投稿画面</a>
+        <a th:href="@{/post}">新規投稿画面</a>
         <!--ユーザー管理画面へ遷移するリンク（本社総務人事部のみ遷移可能）-->
         <div th:if="${buttonFlag == 'ON'}">
             <a th:href="@{user/list}">ユーザー管理画面</a>
@@ -26,8 +26,16 @@
     <!--エラーメッセージ表示-->
 
     <!--投稿表示　件名・カテゴリー・本文・投稿日時・投稿者（氏名）-->
+    <div th:each="m : ${messageFormList}">
+        <p>
+            <span th:text="${m.account}"></span>
+            <span th:text="${#temporals.format(m.createdDate, 'yyyy/MM/dd HH:mm')}"></span>
+        </p>
+        <p>件名:<span th:text="${m.title}"></span></p>
+        <p>カテゴリー:<span th:text="${m.category}"></span></p>
+        <p th:text="${m.text}"></p><br/>
     <!--コメント入力欄-->
     <!--コメント一覧-->
-
+    </div>
 </body>
 </html>
