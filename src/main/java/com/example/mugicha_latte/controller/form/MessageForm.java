@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+//HOME画面に渡すためのFORM
 public class MessageForm {
 
     //ID
@@ -26,4 +27,5 @@ public class MessageForm {
 
     //投稿者（氏名）usersテーブルとJOINしてる。
     private String account;
+
 }
