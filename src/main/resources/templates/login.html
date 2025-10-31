@@ -7,7 +7,12 @@
 <body>
     <h1>ログイン</h1>
 
-    <!-- エラーメッセージの出る場所-->
+    <!-- エラーメッセージ-->
+    <div th:if="${errorMessages != null}" class="error-messages">
+        <ul>
+            <li th:text="${errorMessages}"></li>
+        </ul>
+    </div>
     <form method="post" action="login" th:object="${loginForm}">
         <div>
             <label>アカウント</label>
