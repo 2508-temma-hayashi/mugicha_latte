@@ -1,6 +1,7 @@
 package com.example.mugicha_latte.controller;
 
 import com.example.mugicha_latte.controller.form.UserForm;
+import com.example.mugicha_latte.repository.entity.User;
 import com.example.mugicha_latte.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class LoginContorller {
     public ModelAndView loginContent(@ModelAttribute @Validated UserForm userForm,
                                      BindingResult result, HttpSession session) {
         List<String> errorMessages = new ArrayList<>();
-        UserForm loginUserForm = new UserForm();
+        User loginUser = new User();
         if (result.hasErrors()) {
             for (FieldError error : result.getFieldErrors()) {
                 errorMessages.add(error.getDefaultMessage());
@@ -47,10 +48,10 @@ public class LoginContorller {
             mav.setViewName("/login");
             return mav;
         } else {
-             loginUserForm = loginService.findUsers(userForm);
+             loginUser = loginService.findUsers(userForm);
         }
-        if (loginUserForm != null) {
-            session.setAttribute("loginUser", loginUserForm);
+        if (loginUser != null) {
+            session.setAttribute("loginUser", loginUser);
             return new ModelAndView("redirect:home");
         } else {
             ModelAndView mav = new ModelAndView();

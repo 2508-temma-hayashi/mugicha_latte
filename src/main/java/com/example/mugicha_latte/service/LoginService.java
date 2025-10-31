@@ -14,14 +14,14 @@ public class LoginService {
 
     @Autowired
     UsersRepository usersRepository;
-    public UserForm findUsers(UserForm userForm) {
+    public User findUsers(UserForm userForm) {
         //loginUsersFormのユーザー情報、ユーザーが止まってるかどうかをここで確認する
         String encPassword = CipherUtil.encrypt(userForm.getPassword());
         userForm.setPassword(encPassword);
         List<User> userList = usersRepository.findByAccountAndPassword(userForm.getAccount(), userForm.getPassword());
         if (checkUsers(userList)) {
             User user = userList.get(0);
-            return setUsersForm(user);
+            return user;
         } else {
             return null;
         }
@@ -36,19 +36,6 @@ public class LoginService {
         } else {
             return true;
         }
-    }
-
-    public UserForm setUsersForm(User user) {
-        UserForm userForm = new UserForm();
-        userForm.setId(user.getId());
-        userForm.setAccount(user.getAccount());
-        userForm.setName(user.getName());
-        userForm.setPassword(user.getPassword());
-        userForm.setBranchId(user.getBranchId());
-        userForm.setCreatedDate(user.getCreatedDate());
-        userForm.setUpdatedDate(user.getUpdatedDate());
-        userForm.setIsStopped(user.getIsStopped());
-        return userForm;
     }
 
 }
