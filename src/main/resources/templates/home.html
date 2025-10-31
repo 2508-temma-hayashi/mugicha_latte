@@ -46,7 +46,7 @@
         <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}">
             <div class="" style="display: flex;">
                 <p th:text="${c.User.name}"></p>
-                <p th:text="${c.createdDate}"></p>
+                <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
             </div>
             <p th:text="${c.text}"></p>
         </div>
