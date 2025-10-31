@@ -45,6 +45,7 @@ public class LoginContorller {
             mav.addObject("errorMessages", errorMessages);
             mav.addObject("loginForm", userForm);
             mav.setViewName("/login");
+            return mav;
         } else {
              loginUserForm = loginService.findUsers(userForm);
         }
