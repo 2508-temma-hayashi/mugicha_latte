@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザ登録</title>
+</head>
+<body>
+<h1>ユーザ登録</h1>
+    <!--エラーメッセージ-->
+    <div th:if="${errorMessages != null}" class="error-messages">
+        <ul>
+            <li th:text="${errorMessages}"></li>
+        </ul>
+    </div>
+
+    <form th:action="@{/signup}" method="post" th:object="${signupModel}">
+        <div>
+            <label>アカウント</label>
+            <input type="text" th:field="*{account}">
+        </div>
+
+        <div>
+            <label>パスワード</label>
+            <input type="password" th:field="*{password}">
+        </div>
+
+        <div>
+            <label>パスワード（確認用）</label>
+            <input type="password" th:field="*{passwordConfirm}">
+        </div>
+
+        <div>
+            <label>氏名</label>
+            <input type="text" th:field="*{name}">
+        </div>
+
+        <div>
+            <label>支社</label>
+            <select th:field="*{branchId}">
+                <option value="">--支社を選択--</option>
+                <option value="1">本社</option>
+                <option value="2">支社A</option>
+                <option value="3">支社B</option>
+                <option value="4">支社C</option>
+            </select>
+        </div>
+
+        <div>
+            <label>本社</label>
+            <select th:field="*{departmentId}">
+                <option value="">--部署を選択--</option>
+                <option value="1">総務人事部(本社のみ)</option>
+                <option value="2">情報管理部(本社のみ)</option>
+                <option value="3">営業部</option>
+                <option value="4">技術部</option>
+            </select>
+        </div>
+        <input type="submit" value="登録する">
+    </form>
+</body>
+</html>
