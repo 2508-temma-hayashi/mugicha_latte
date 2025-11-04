@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,6 +41,13 @@ public class CommentController {
         //Commentクラスの保存するメソッドを起動
         commentService.saveComment(commentForm,session);
         return new ModelAndView("redirect:/home");
+    }
+
+    //コメント削除機能
+    @PostMapping("/comment/delete")
+    public String deleteComment(@RequestParam("id") int id){
+        commentService.deleteComment(id);
+        return "redirect:/home";
     }
 
     //エラー取得メソッド（汎用）

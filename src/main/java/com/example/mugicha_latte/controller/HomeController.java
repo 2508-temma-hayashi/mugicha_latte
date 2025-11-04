@@ -42,6 +42,8 @@ public class HomeController {
 
         //★HTMLに渡す
         ModelAndView mav = new ModelAndView("home");
+        //ログインユーザーを入れる
+        mav.addObject("loginUser", user);
         //投稿をmodelに詰める
         mav.addObject("messageFormList", messageFormList);
         //コメント入力欄に空欄を渡す

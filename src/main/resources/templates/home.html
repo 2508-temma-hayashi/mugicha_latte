@@ -44,6 +44,7 @@
         <!--コメント入力欄-->
         <form th:action="@{/comment}" th:object="${commentForm}" method="post">
             <textarea th:field="*{text}"></textarea><br/>
+            <input type="hidden" name=messageId th:value="${m.id}">
             <input type="submit" value="コメントする">
         </form>
         <!--コメント一覧-->
@@ -53,6 +54,13 @@
                 <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
             </div>
             <p th:text="${c.text}"></p>
+            <!--コメント削除ボタン-->
+            <div th:if="${c.userId == loginUser.id}">
+                <form th:action="@{comment/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${c.id}">
+                    <input type="submit" value="削除">
+                </form>
+            </div>
         </div>
     </div>
 </body>

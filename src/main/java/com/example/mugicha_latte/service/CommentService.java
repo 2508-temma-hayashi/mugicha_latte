@@ -22,6 +22,7 @@ public class CommentService {
         return commentRepository.findAllComments();
     }
 
+    //コメント投稿
     public void saveComment(CommentForm form, HttpSession session){
         //セッションからログインユーザーの情報（entity）を取得。コメント者IDが欲しいので
         //HTMLから受け取らないのはセキュリティのため。
@@ -37,6 +38,11 @@ public class CommentService {
         comment.setUpdatedDate(LocalDateTime.now());
         commentRepository.save(comment);
 
+    }
+
+    //コメント削除
+    public void deleteComment(int id){
+        commentRepository.deleteById(id);
     }
 
 }
