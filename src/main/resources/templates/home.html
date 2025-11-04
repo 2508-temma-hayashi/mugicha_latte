@@ -31,6 +31,11 @@
 
 
     <!--エラーメッセージ表示-->
+    <div th:if="${errorMessages != null}" class="error-messages">
+        <ul>
+            <li th:text="${errorMessages}"></li>
+        </ul>
+    </div>
 
     <!--投稿表示　件名・カテゴリー・本文・投稿日時・投稿者（氏名）-->
     <div th:each="m : ${messageFormList}">
@@ -41,6 +46,12 @@
         <p>件名:<span th:text="${m.title}"></span></p>
         <p>カテゴリー:<span th:text="${m.category}"></span></p>
         <p th:text="${m.text}"></p><br/>
+        <div th:if="${m.userId == loginUser.id}">
+            <form th:action="@{post/delete}" method="post">
+                <input type="hidden" name="id" th:value="${m.id}">
+                <input type="submit" value="削除">
+            </form>
+        </div>
         <!--コメント入力欄-->
         <form th:action="@{/comment}" th:object="${commentForm}" method="post">
             <textarea th:field="*{text}"></textarea><br/>

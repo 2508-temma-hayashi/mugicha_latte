@@ -52,6 +52,7 @@ public class MessageService {
             f.setText(m.getText());
             f.setCreatedDate(m.getCreatedDate());
             f.setAccount(m.getUser().getName());
+            f.setUserId(m.getUser().getId());
             formList.add(f);
         }
 
