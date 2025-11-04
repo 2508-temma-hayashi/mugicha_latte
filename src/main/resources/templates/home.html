@@ -41,7 +41,11 @@
         <p>件名:<span th:text="${m.title}"></span></p>
         <p>カテゴリー:<span th:text="${m.category}"></span></p>
         <p th:text="${m.text}"></p><br/>
-    <!--コメント入力欄-->
+        <!--コメント入力欄-->
+        <form th:action="@{/comment}" th:object="${commentForm}" method="post">
+            <textarea th:field="*{text}"></textarea><br/>
+            <input type="submit" value="コメントする">
+        </form>
         <!--コメント一覧-->
         <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}">
             <div class="" style="display: flex;">

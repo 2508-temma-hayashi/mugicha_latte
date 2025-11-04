@@ -1,5 +1,6 @@
 package com.example.mugicha_latte.controller;
 
+import com.example.mugicha_latte.controller.form.CommentForm;
 import com.example.mugicha_latte.controller.form.MessageForm;
 import com.example.mugicha_latte.controller.form.MessageSearchForm;
 import com.example.mugicha_latte.repository.entity.Comment;
@@ -43,11 +44,13 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("home");
         //投稿をmodelに詰める
         mav.addObject("messageFormList", messageFormList);
+        //コメント入力欄に空欄を渡す
+        mav.addObject("commentForm", new CommentForm());
         //コメントをhtmlに渡す
         mav.addObject("commentList", commentList);
         //絞り込み入力値保持のためformもそのまま渡しておく
         mav.addObject("messageSearchForm", form);
-        //本社所属の総務人事部ならON、そうでないならOFFの文字列も判別のために送る・
+        //本社所属の総務人事部ならON、そうでないならOFFの文字列も判別のために送る
         mav.addObject("buttonFlag", buttonFlag);
         return mav;
     }

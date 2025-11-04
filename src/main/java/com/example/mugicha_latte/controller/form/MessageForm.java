@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-//HOME画面に渡すためのFORM
+//HOME画面に渡し表示するためのFORM
 public class MessageForm {
 
     //ID
