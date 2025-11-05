@@ -37,22 +37,22 @@
         <div>
             <label>支社</label>
             <select th:field="*{branchId}">
-                <option value="">--支社を選択--</option>
-                <option value="1">本社</option>
-                <option value="2">支社A</option>
-                <option value="3">支社B</option>
-                <option value="4">支社C</option>
+                <option value="" th:selected="${branchId == null}">--支社を選択--</option>
+                <option value="1" th:selected="${branchId == 1}">本社</option>
+                <option value="2" th:selected="${branchId == 2}">支社A</option>
+                <option value="3" th:selected="${branchId == 3}">支社B</option>
+                <option value="4" th:selected="${branchId == 4}">支社C</option>
             </select>
         </div>
 
         <div>
             <label>本社</label>
             <select th:field="*{departmentId}">
-                <option value="">--部署を選択--</option>
-                <option value="1">総務人事部(本社のみ)</option>
-                <option value="2">情報管理部(本社のみ)</option>
-                <option value="3">営業部</option>
-                <option value="4">技術部</option>
+                <option value="" th:selected="${departmentId == null}">--部署を選択--</option>
+                <option value="1" th:selected="${departmentId == 1}">総務人事部(本社のみ)</option>
+                <option value="2" th:selected="${departmentId == 2}">情報管理部(本社のみ)</option>
+                <option value="3" th:selected="${departmentId == 3}">営業部</option>
+                <option value="4" th:selected="${departmentId == 4}">技術部</option>
             </select>
         </div>
         <input type="submit" value="登録する">
