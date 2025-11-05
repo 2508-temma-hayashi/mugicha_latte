@@ -27,7 +27,7 @@
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.branchName}"></td>
                 <td th:text="${user.departmentName}"></td>
-                <td th:text="${user.isStopped == 1 ? '停止' : '稼働'}"></td>
+                <td th:text="${user.isStopped == 0 ? '停止' : '稼働'}"></td>
                 <td>
                 <!--編集ボタン-->
                 <a th:href="@{user/edit}">
@@ -37,7 +37,7 @@
                 <form th:action="@{user/update}" method="post"
                       onsubmit="return confirm('本当に変更していいですか？');">
                     <button type="submit" th:disabled="${user.id == loginUser.id}"
-                            th:text="${user.isStopped == 1 ? '復活' : '停止'}"></button>
+                            th:text="${user.isStopped == 0 ? '復活' : '停止'}"></button>
                 </form>
             </tr>
         </tbody>
