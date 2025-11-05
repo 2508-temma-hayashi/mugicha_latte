@@ -1,7 +1,7 @@
 package com.example.mugicha_latte.service;
 
 import com.example.mugicha_latte.controller.form.UserForm;
-import com.example.mugicha_latte.repository.UsersRepository;
+import com.example.mugicha_latte.repository.UserRepository;
 import com.example.mugicha_latte.repository.entity.User;
 import com.example.mugicha_latte.utils.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import java.util.List;
 public class LoginService {
 
     @Autowired
-    UsersRepository usersRepository;
+    UserRepository userRepository;
     public User findUsers(UserForm userForm) {
         //loginUsersFormのユーザー情報、ユーザーが止まってるかどうかをここで確認する
         String encPassword = CipherUtil.encrypt(userForm.getPassword());
         userForm.setPassword(encPassword);
-        List<User> userList = usersRepository.findByAccountAndPassword(userForm.getAccount(), userForm.getPassword());
+        List<User> userList = userRepository.findByAccountAndPassword(userForm.getAccount(), userForm.getPassword());
         if (checkUsers(userList)) {
             User user = userList.get(0);
             return user;
