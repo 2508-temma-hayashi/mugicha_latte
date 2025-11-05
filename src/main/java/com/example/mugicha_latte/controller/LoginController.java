@@ -24,9 +24,15 @@ public class LoginController {
     LoginService loginService;
 
     @GetMapping("/login")
-    public ModelAndView loginContent(@ModelAttribute UserForm userForm) {
+    public ModelAndView loginContent(@ModelAttribute UserForm userForm,
+                                     HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("loginForm", userForm);
+        String errorMessage = (String) session.getAttribute("errorMessage");
+        if (errorMessage != null) {
+            mav.addObject("errorMessages", errorMessage);
+            session.removeAttribute("errorMessages"); // 表示後に削除
+        }
         mav.setViewName("/login");
         return mav;
     }
