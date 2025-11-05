@@ -1,6 +1,6 @@
 package com.example.mugicha_latte.controller.form;
 
-import com.example.mugicha_latte.repository.UsersRepository;
+import com.example.mugicha_latte.repository.UserRepository;
 import com.example.mugicha_latte.repository.entity.User;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
