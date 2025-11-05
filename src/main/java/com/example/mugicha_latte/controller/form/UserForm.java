@@ -22,4 +22,7 @@ public class UserForm {
     private int isStopped;
     private LocalDateTime CreatedDate;
     private LocalDateTime UpdatedDate;
+    //ユーザー管理画面表示で使うため追加
+    private String branchName;
+    private String departmentName;
 }
