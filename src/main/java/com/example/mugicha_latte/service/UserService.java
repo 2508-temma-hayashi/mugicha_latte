@@ -56,4 +56,19 @@ public class UserService {
         }
     }
 
+    //ユーザー情報編集（更新メソッド）
+    public UserForm updateUser(int id){
+        User user = userRepository.findById(id).orElse(null);
+        UserForm form = new UserForm();
+
+        form.setId(user.getId());
+        form.setName(user.getName());
+        form.setAccount(user.getAccount());
+        form.setPassword(user.getPassword());
+        form.setDepartmentId(user.getDepartmentId());
+        form.setBranchId(user.getBranchId());
+
+        return form;
+    }
+
 }

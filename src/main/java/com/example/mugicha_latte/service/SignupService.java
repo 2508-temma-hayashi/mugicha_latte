@@ -1,7 +1,7 @@
 package com.example.mugicha_latte.service;
 
 import com.example.mugicha_latte.controller.form.SignupForm;
-import com.example.mugicha_latte.repository.UsersRepository;
+import com.example.mugicha_latte.repository.UserRepository;
 import com.example.mugicha_latte.repository.entity.User;
 import com.example.mugicha_latte.utils.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Service
 public class SignupService {
     @Autowired
-    UsersRepository usersRepository;
+    UserRepository usersRepository;
     public boolean checkUser(SignupForm signupForm) {
         //accountの重複チェックを行う
         //重複チェックに引っかかった場合は、falseを返してControllerにエラーメッセージを入れる
