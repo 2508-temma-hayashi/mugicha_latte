@@ -13,9 +13,52 @@
     </div>
 
     <!--エラーメッセージ-->
-
+    <div th:if="${errorMessages != null}" class="error-messages">
+        <ul>
+            <li th:text="${errorMessages}"></li>
+        </ul>
+    </div>
     <!--更新フォーム-->
+    <form th:action="@{/user/editInfo/{id}(id=${userEditForm.id})}" th:object="${userEditForm}" method="post">
+        <input type="hidden" th:field="*{id}">
 
+        <label>アカウント：</label>
+        <input type="text" th:field="*{account}"><br>
+
+        <label>パスワード：</label>
+        <input type="password" th:field="*{password}"><br>
+
+        <label>確認用パスワード：</label>
+        <input type="password" th:field="*{confirmPassword}"><br>
+
+        <label>氏名：</label>
+        <input type="text" th:field="*{name}"><br>
+
+
+        <p th:if="${userEditForm.id == loginUser.id}">
+            ※管理者は自身の支社と部署を変更できません
+        </p>
+
+        <select th:field="*{branchId}" th:disabled="${userEditForm.id == loginUser.id}">
+            <option value="">--支社を選択--</option>
+            <option value="1">本社</option>
+            <option value="2">支社A</option>
+            <option value="3">支社B</option>
+            <option value="4">支社C</option>
+        </select><br/>
+
+        <select th:field="*{departmentId}" th:disabled="${userEditForm.id == loginUser.id}">
+            <option value="">--部署を選択--</option>
+            <option value="1">総務人事部(本社のみ)</option>
+            <option value="2">情報管理部(本社のみ)</option>
+            <option value="3">営業部</option>
+            <option value="4">技術部</option>
+        </select><br/>
+
+
+        <button type="submit">編集</button>
+
+    </form>
     </form>
 </body>
 </html>

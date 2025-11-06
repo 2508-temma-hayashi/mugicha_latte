@@ -15,7 +15,7 @@ public class User {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column
     private String account;
@@ -27,13 +27,13 @@ public class User {
     private String name;
 
     @Column(name = "branch_id")
-    private int branchId;
+    private Integer branchId;
 
     @Column(name = "department_id")
-    private int departmentId;
+    private Integer departmentId;
 
     @Column(name = "is_stopped")
-    private int isStopped;
+    private Integer isStopped;
 
     @Column(name ="created_date")
     private LocalDateTime CreatedDate;

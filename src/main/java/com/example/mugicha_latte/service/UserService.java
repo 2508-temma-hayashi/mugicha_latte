@@ -1,5 +1,6 @@
 package com.example.mugicha_latte.service;
 
+import com.example.mugicha_latte.controller.form.UserEditForm;
 import com.example.mugicha_latte.controller.form.UserForm;
 import com.example.mugicha_latte.repository.UserRepository;
 import com.example.mugicha_latte.repository.entity.User;
@@ -56,10 +57,10 @@ public class UserService {
         }
     }
 
-    //ユーザー情報編集（更新メソッド）
-    public UserForm updateUser(int id){
+    //ユーザー情報表示メソッド（１件）
+    public UserEditForm updateUser(int id){
         User user = userRepository.findById(id).orElse(null);
-        UserForm form = new UserForm();
+        UserEditForm form = new UserEditForm();
 
         form.setId(user.getId());
         form.setName(user.getName());
@@ -71,4 +72,74 @@ public class UserService {
         return form;
     }
 
+    //バリデーションメソッド（更新用）
+    public List<String> editValidate(UserEditForm form){
+        List<String> errorMessages = new ArrayList<>();
+        Integer id = form.getId();
+        String account = form.getAccount();
+        Integer branchId = form.getBranchId();
+        Integer departmentId = form.getDepartmentId();
+        String password = form.getPassword();
+        String confirmPassword = form.getConfirmPassword();
+
+        //アカウント名（必須入力・６～２０文字・半角英数字か）
+        if(account == null || account.trim().isEmpty()){
+            errorMessages.add("アカウントを入力してください");
+        }else if(!account.matches("^[a-zA-Z0-9]{6,20}$")){
+            errorMessages.add("アカウントは半角英数字かつ6文字以上20文字以下で入力してください");
+        }
+
+        // アカウント重複チェック
+        User duplicate = userRepository.findByAccount(form.getAccount());
+        if (duplicate != null && !duplicate.getId().equals(form.getId())) {
+            errorMessages.add("アカウントが既に使用されています");
+        }
+
+        //パスワードに入力があった際に半角で6～20文字以内か確認
+        if ((password != null && !password.trim().isEmpty())
+                &&(!password.matches("^[a-zA-Z0-9]{6,20}$"))){
+            errorMessages.add("パスワードは半角英数字かつ6文字以上20文字以下で入力してください");
+        }
+
+        //パスワードと確認用パスワードが一致してるか確認
+        if (password != null && confirmPassword != null && !password.equals(confirmPassword)) {
+            errorMessages.add("パスワードと確認用パスワードが一致しません");
+        }
+
+        if(branchId != null && departmentId != null){
+            boolean invalid = false;
+
+            switch(branchId){
+                case 1 -> invalid = (departmentId != 1 && departmentId != 2);
+                case 2, 3, 4 -> invalid = (departmentId != 3 && departmentId != 4);
+                default -> invalid = true;
+            }
+
+            if (invalid) {
+                errorMessages.add("支社と部署の組み合わせが不正です");
+            }
+        }
+        return errorMessages;
+
+    }
+
+    //ユーザー情報更新メソッド
+    public void updateUser(UserEditForm form) {
+        // DBから既存ユーザーを取得
+        User user = userRepository.findById(form.getId()).orElse(null);
+
+        // 共通項目を上書き
+        user.setAccount(form.getAccount());
+        user.setName(form.getName());
+        user.setBranchId(form.getBranchId());
+        user.setDepartmentId(form.getDepartmentId());
+
+        // パスワード欄に入力がある場合のみ更新
+        if (form.getPassword() != null && !form.getPassword().trim().isEmpty()) {
+            user.setPassword(form.getPassword());
+        }
+
+        user.setUpdatedDate(LocalDateTime.now());
+        userRepository.save(user);
+    }
 }
