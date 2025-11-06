@@ -28,7 +28,7 @@ public class LoginController {
                                      HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("loginForm", userForm);
-        String errorMessage = (String) session.getAttribute("errorMessage");
+        String errorMessage = (String) session.getAttribute("errorMessages");
         if (errorMessage != null) {
             mav.addObject("errorMessages", errorMessage);
             session.removeAttribute("errorMessages"); // 表示後に削除

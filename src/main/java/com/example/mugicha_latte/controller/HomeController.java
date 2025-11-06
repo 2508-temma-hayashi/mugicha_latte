@@ -26,6 +26,16 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView showHome(@ModelAttribute MessageSearchForm form, HttpSession session){
 
+        //★HTMLに渡す
+        ModelAndView mav = new ModelAndView("home");
+
+        //管理者権限フィルターのエラーメッセージ表示
+        String errorMessage = (String) session.getAttribute("errorMessages");
+        if (errorMessage != null) {
+            mav.addObject("errorMessages", errorMessage);
+            session.removeAttribute("errorMessages"); // 表示後に削除
+        }
+
         //★ログインユーザーが総務人事部か確認
         User user = (User) session.getAttribute("loginUser");
         String buttonFlag = "OFF";
@@ -40,8 +50,6 @@ public class HomeController {
         //コメント取得
         List<Comment> commentList = commentService.findComment();
 
-        //★HTMLに渡す
-        ModelAndView mav = new ModelAndView("home");
         //ログインユーザーを入れる
         mav.addObject("loginUser", user);
         //投稿をmodelに詰める
