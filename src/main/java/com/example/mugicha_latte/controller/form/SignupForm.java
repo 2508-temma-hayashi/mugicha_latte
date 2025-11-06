@@ -12,18 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SignupForm {
 
     @NotBlank(message = "アカウントを入力してください")
-    @Size(min = 6, max = 21, message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "半角英数字のみで入力してください")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9]{6,20}$",
+            message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください"
+    )
     private String account;
 
     @NotBlank(message = "パスワードを入力してください")
-    @Size(min = 6, max = 20, message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください")
-    @Pattern(regexp = "^[\\p{ASCII}]+$", message = "半角文字のみで入力してください")
+    @Pattern(
+            regexp = "^[\\x21-\\x7E]{6,20}$",
+            message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください"
+    )
     private String password;
 
-    @NotBlank(message = "パスワードを入力してください")
-    @Size(min = 6, max = 20, message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください")
-    @Pattern(regexp = "^[\\p{ASCII}]+$", message = "半角文字のみで入力してください")
+    //確認用パスワードはisPasswordMatching()で判定している
     private String passwordConfirm;
 
     @NotBlank(message = "氏名を入力してください")
@@ -37,16 +39,6 @@ public class SignupForm {
     @NotNull(message = "部署を選択してください")
     private Integer departmentId;
 
-    //重複チェック用のメソッド
-//    @AssertTrue(message = "アカウントが重複しています")
-//    private boolean checkAccount() {
-//        User user = usersRepository.findByAccount(account);
-//        if (user == null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
     //パスワード確認
     @AssertTrue(message="パスワードと確認用パスワードが一致しません")
     public boolean isPasswordMatching() {
