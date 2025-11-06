@@ -20,7 +20,7 @@ public class AdministratorFilter implements Filter {
         User user = (User) httpRequest.getSession().getAttribute("loginUser");
         if (user.getDepartmentId() != 1) {
             httpRequest.getSession().setAttribute("errorMessages", "無効なアクセスです");
-            httpResponse.sendRedirect("/home");
+            httpResponse.sendRedirect("home");
             return;
         }
         chain.doFilter(request, response);

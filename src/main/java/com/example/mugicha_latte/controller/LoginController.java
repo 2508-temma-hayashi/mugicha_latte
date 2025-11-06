@@ -58,7 +58,7 @@ public class LoginController {
         }
         if (loginUser != null) {
             session.setAttribute("loginUser", loginUser);
-            return new ModelAndView("redirect:home");
+            return new ModelAndView("redirect:/");
         } else {
             ModelAndView mav = new ModelAndView();
             errorMessages.add("ログインに失敗しました");

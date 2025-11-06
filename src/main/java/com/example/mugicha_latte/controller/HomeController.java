@@ -23,7 +23,7 @@ public class HomeController {
     MessageService messageService;
     @Autowired
     CommentService commentService;
-    @GetMapping("/home")
+    @GetMapping("/")
     public ModelAndView showHome(@ModelAttribute MessageSearchForm form, HttpSession session){
 
         //★HTMLに渡す

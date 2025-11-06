@@ -15,7 +15,7 @@ public class FilterConfig {
 
         bean.setFilter(new LoginFilter());
         //ログイン情報が必要なURL
-        bean.addUrlPatterns("/user/*", "/comment/*","/message/*", "/home", "/logout", "/post", "/signup");
+        bean.addUrlPatterns("/user/*", "/comment/*","/message/*", "/", "/logout", "/post", "/signup");
         bean.setOrder(1);
         return bean;
     }
