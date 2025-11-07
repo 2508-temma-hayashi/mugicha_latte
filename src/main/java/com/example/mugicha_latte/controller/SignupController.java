@@ -21,7 +21,7 @@ public class SignupController {
 
     @Autowired
     SignupService signupService;
-    @GetMapping("signup")
+    @GetMapping("/signup")
     public ModelAndView getSignupContent(@ModelAttribute SignupForm signupForm) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("signupModel", signupForm);
@@ -29,7 +29,7 @@ public class SignupController {
         return mav;
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ModelAndView postSignupContent(@ModelAttribute @Validated SignupForm signupForm,
                                           BindingResult result,
                                           RedirectAttributes redirectAttributes) {
@@ -52,7 +52,7 @@ public class SignupController {
             return mav;
         } else {
             signupService.saveUser(signupForm);
-            return new ModelAndView("redirect:user/list");
+            return new ModelAndView("redirect:/user/list");
         }
     }
 }
