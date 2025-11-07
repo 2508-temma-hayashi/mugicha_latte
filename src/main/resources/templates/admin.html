@@ -2,53 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/normalize.css}" rel="styleSheet">
+    <link th:href="@{/css/style.css}" rel="styleSheet">
+    <link th:href="@{/css/admin.css}" rel="styleSheet">
     <title>ユーザー管理画面</title>
 </head>
 <body>
-    <h2>ユーザー管理画面</h2>
-    <div>
-        <a th:href="@{/}">ホーム画面に戻る</a>
-        <a th:href="@{/signup}">ユーザー新規登録</a>
-    </div>
-    <!--エラーメッセージ表示（未実装）-->
-    <div th:if="${errorMessages != null}" class="error-messages">
-        <ul>
-            <li th:text="${errorMessages}"></li>
-        </ul>
-    </div>
+    <div class="contents">
+        <h2>ユーザー管理画面</h2>
+        <div>
+            <a th:href="@{/}">ホーム画面に戻る</a>
+            <a th:href="@{/signup}">ユーザー新規登録</a>
+        </div>
+        <!--エラーメッセージ表示（未実装）-->
+        <div th:if="${errorMessages != null}" class="error-messages">
+            <ul>
+                <li th:text="${errorMessages}"></li>
+            </ul>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>アカウント</th>
-                <th>氏名</th>
-                <th>支店名</th>
-                <th>部署名</th>
-                <th>ユーザー停止状態</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="user : ${userFormList}">
-                <td th:text="${user.account}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.branchName}"></td>
-                <td th:text="${user.departmentName}"></td>
-                <td th:text="${user.isStopped == 0 ? '停止' : '稼働'}"></td>
-                <td>
-                <!--編集ボタン-->
-                <a th:href="@{/user/edit/{id}(id=${user.id})}">
-                    <button type="button">編集</button>
-                </a>
-                <!--停止復活ボタン-->
-                <form th:action="@{/user/update}" method="post"
-                      onsubmit="return confirm('本当に変更していいですか？');">
-                    <input type="hidden" name="id" th:value="${user.id}">
-                    <button type="submit" th:disabled="${user.id == loginUser.id}"
-                            th:text="${user.isStopped == 0 ? '復活' : '停止'}"></button>
-                </form>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>アカウント</th>
+                    <th>氏名</th>
+                    <th>支店名</th>
+                    <th>部署名</th>
+                    <th>ユーザー停止状態</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${userFormList}">
+                    <td th:text="${user.account}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.branchName}"></td>
+                    <td th:text="${user.departmentName}"></td>
+                    <td>
+                        <div class="flex">
+                            <p th:text="${user.isStopped == 0 ? '停止' : '稼働'}"></p>
+                            <!--編集ボタン-->
+                            <div>
+                                <a th:href="@{/user/edit/{id}(id=${user.id})}">
+                                    <button type="button">編集</button>
+                                </a>
+                                <!--停止復活ボタン-->
+                                <form th:action="@{/user/update}" method="post"
+                                      onsubmit="return confirm('本当に変更していいですか？');">
+                                    <input type="hidden" name="id" th:value="${user.id}">
+                                    <button type="submit" th:disabled="${user.id == loginUser.id}"
+                                            th:text="${user.isStopped == 0 ? '復活' : '停止'}"></button>
+                                </form>
+                            </div>
+                        </div>
 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
