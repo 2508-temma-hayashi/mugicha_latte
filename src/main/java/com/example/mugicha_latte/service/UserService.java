@@ -97,8 +97,8 @@ public class UserService {
 
         //パスワードに入力があった際に半角で6～20文字以内か確認
         if ((password != null && !password.trim().isEmpty())
-                &&(!password.matches("^[a-zA-Z0-9]{6,20}$"))){
-            errorMessages.add("パスワードは半角英数字かつ6文字以上20文字以下で入力してください");
+                &&(!password.matches("^[\\x21-\\x7E]{6,20}$"))){
+            errorMessages.add("パスワードは半角文字かつ6文字以上20文字以下で入力してください");
         }
 
         //パスワードと確認用パスワードが一致してるか確認

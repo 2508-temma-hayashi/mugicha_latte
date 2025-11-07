@@ -9,7 +9,7 @@
     <!--メニュー-->
     <div>
         <a th:href="@{/user/list}">ユーザー管理画面に戻る</a>
-        <a th:href="@{/home}">ホーム画面に戻る</a>
+        <a th:href="@{/}">ホーム画面に戻る</a>
     </div>
 
     <!--エラーメッセージ-->
@@ -39,6 +39,7 @@
             ※管理者は自身の支社と部署を変更できません
         </p>
 
+        <label>支社</label>
         <select th:field="*{branchId}" th:disabled="${userEditForm.id == loginUser.id}">
             <option value="">--支社を選択--</option>
             <option value="1">本社</option>
@@ -47,6 +48,7 @@
             <option value="4">支社C</option>
         </select><br/>
 
+        <label>部署</label>
         <select th:field="*{departmentId}" th:disabled="${userEditForm.id == loginUser.id}">
             <option value="">--部署を選択--</option>
             <option value="1">総務人事部(本社のみ)</option>

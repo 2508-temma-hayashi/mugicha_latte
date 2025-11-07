@@ -47,12 +47,13 @@ public class PostController {
         if (errorMessages.size() >= 1) {
             redirectAttributes.addFlashAttribute("postModel", postForm);
             redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
-            return new ModelAndView("redirect:post");
+            return new ModelAndView("redirect:/post");
         }
         else {
             User user = (User) session.getAttribute("loginUser");
             postService.savePost(postForm, user.getId());
-            return new ModelAndView("redirect:home");
+            return new ModelAndView("redirect:/");
+
         }
     }
 }

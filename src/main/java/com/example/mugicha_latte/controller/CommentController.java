@@ -35,19 +35,19 @@ public class CommentController {
         if(result.hasErrors()){
             redirectAttributes.addFlashAttribute("errorMessages",errorMessages);
             redirectAttributes.addFlashAttribute("commentForm", commentForm);
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/");
         }
 
         //Commentクラスの保存するメソッドを起動
         commentService.saveComment(commentForm,session);
-        return new ModelAndView("redirect:/home");
+        return new ModelAndView("redirect:/");
     }
 
     //コメント削除機能
     @PostMapping("/comment/delete")
     public String deleteComment(@RequestParam("id") int id){
         commentService.deleteComment(id);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     //エラー取得メソッド（汎用）

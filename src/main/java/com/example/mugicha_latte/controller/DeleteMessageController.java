@@ -34,9 +34,9 @@ public class DeleteMessageController {
 
         if (errorMessages.size() >= 1) {
             redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/");
         } else {
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/");
         }
     }
 }

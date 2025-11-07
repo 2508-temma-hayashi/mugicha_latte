@@ -21,7 +21,7 @@
 
 
     <!--絞り込み入力-->
-    <form th:action="@{/home}" th:object="${messageSearchForm}" method="get">
+    <form th:action="@{/}" th:object="${messageSearchForm}" method="get">
         <label>開始日：</label><input type="date" th:field="*{startDate}">
         <label>終了日：</label><input type="date" th:field="*{endDate}">
         <label>カテゴリー</label><input type="text" th:field="*{category}">
@@ -45,7 +45,7 @@
         </p>
         <p>件名:<span th:text="${m.title}"></span></p>
         <p>カテゴリー:<span th:text="${m.category}"></span></p>
-        <p th:text="${m.text}"></p><br/>
+        <p th:text="${m.text}" style="white-space: pre-wrap;"></p><br/>
         <div th:if="${m.userId == loginUser.id}">
             <form th:action="@{post/delete}" method="post">
                 <input type="hidden" name="id" th:value="${m.id}">
@@ -64,10 +64,10 @@
                 <p th:text="${c.User.name}"></p>
                 <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
             </div>
-            <p th:text="${c.text}"></p>
+            <p th:text="${c.text}" style="white-space: pre-wrap;"></p>
             <!--コメント削除ボタン-->
             <div th:if="${c.userId == loginUser.id}">
-                <form th:action="@{comment/delete}" method="post">
+                <form th:action="@{comment/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
                     <input type="hidden" name="id" th:value="${c.id}">
                     <input type="submit" value="削除">
                 </form>
