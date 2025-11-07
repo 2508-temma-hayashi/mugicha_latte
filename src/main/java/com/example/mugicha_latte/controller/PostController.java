@@ -25,7 +25,7 @@ public class PostController {
     PostService postService;
 
     @GetMapping("/post")
-    public ModelAndView postContent(@ModelAttribute PostForm postForm) {
+    public ModelAndView postContent(@ModelAttribute("postModel") PostForm postForm) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("postModel", postForm);
         mav.setViewName("/post");

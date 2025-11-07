@@ -13,14 +13,14 @@ public class SignupForm {
 
     @NotBlank(message = "アカウントを入力してください")
     @Pattern(
-            regexp = "^[a-zA-Z0-9]{6,20}$",
+            regexp = "^$|^[a-zA-Z0-9]{6,20}$",
             message = "アカウントは半角英数字かつ6文字以上20文字以下で入力してください"
     )
     private String account;
 
     @NotBlank(message = "パスワードを入力してください")
     @Pattern(
-            regexp = "^[\\x21-\\x7E]{6,20}$",
+            regexp = "^$|^[a-zA-Z0-9]{6,20}$",
             message = "パスワードは半角文字かつ6文字以上20文字以下で入力してください"
     )
     private String password;
