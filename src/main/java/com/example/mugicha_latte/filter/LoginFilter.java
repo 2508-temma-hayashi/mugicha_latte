@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         User user = (User) httpRequest.getSession().getAttribute("loginUser");
         if (user == null) {
             httpRequest.getSession().setAttribute("errorMessages", "ログインしてください");
-            httpResponse.sendRedirect("login");
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
             return;
         }
         chain.doFilter(request, response);
