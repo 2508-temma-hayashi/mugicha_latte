@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +45,43 @@ public class AdminController {
 
     //ユーザー編集画面表示
     @GetMapping("/user/edit/{id}")
-    public ModelAndView editUser(@PathVariable("id") int id,
-                                 HttpSession session) {
-        ModelAndView mav = new ModelAndView("edit");
+    public ModelAndView editUser(@PathVariable("id") String id,
+                                 HttpSession session,
+                                 RedirectAttributes redirectAttributes) {
+        ModelAndView mav = new ModelAndView();
 
+
+        //IDが数字でないとき
+        if(!id.matches("\\d+")){
+            redirectAttributes.addFlashAttribute("errorMessages", "不正なパラメータが入力されました");
+            mav.setViewName("redirect:/user/list");
+            return mav;
+        }
+        int userId = Integer.parseInt(id);
+
+        User user = new User();
+        user = userService.getUser(userId);
+
+        //存在しない数字の時
+        if(user == null){
+            redirectAttributes.addFlashAttribute("errorMessages", "不正なパラメータが入力されました");
+            mav.setViewName("redirect:/user/list");
+            return mav;
+        }
+
+        mav.setViewName("edit");
         User loginUser = (User) session.getAttribute("loginUser");
-        UserEditForm userEditForm = userService.updateUser(id);
+        UserEditForm userEditForm = userService.updateUser(userId);
         mav.addObject("userEditForm", userEditForm);
         mav.addObject("loginUser", loginUser);
         return mav;
+    }
+
+    //URLにIDが含まれていない場合のエラー処理
+    @GetMapping("/user/edit/")
+    public ModelAndView invalidEditAccess(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("errorMessages", "不正なパラメータが入力されました");
+        return new ModelAndView("redirect:/user/list");
     }
 
     //ユーザー編集処理
