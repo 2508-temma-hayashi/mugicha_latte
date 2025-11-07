@@ -47,7 +47,7 @@
         <p>カテゴリー:<span th:text="${m.category}"></span></p>
         <p th:text="${m.text}" style="white-space: pre-wrap;"></p><br/>
         <div th:if="${m.userId == loginUser.id}">
-            <form th:action="@{post/delete}" method="post">
+            <form th:action="@{post/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
                 <input type="hidden" name="id" th:value="${m.id}">
                 <input type="submit" value="削除">
             </form>
@@ -64,7 +64,7 @@
                 <p th:text="${c.User.name}"></p>
                 <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
             </div>
-            <p th:text="${c.text}" style="white-space: pre-wrap;"></p>
+            <pre th:text="${c.text}" style="white-space: pre-wrap;"></pre>
             <!--コメント削除ボタン-->
             <div th:if="${c.userId == loginUser.id}">
                 <form th:action="@{comment/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
