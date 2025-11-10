@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>新規投稿画面</title>
-</head>
-<body>
-    <h1>新規投稿画面</h1>
-    <!--エラーメッセージ-->
-    <div th:if="${errorMessages != null}" class="error-messages">
-        <ul>
-            <li th:text="${errorMessages}"></li>
-        </ul>
-    </div>
-    <form th:action="@{/post}" method="post" th:object="${postModel}">
-        <div>
-            <label>件名</label>
-            <input type="text" th:field="*{title}">
+    <head>
+        <meta charset="UTF-8">
+        <title>新規投稿画面</title>
+    </head>
+    <body>
+        <div class="contents">
+            <h1>新規投稿画面</h1>
+            <!--エラーメッセージ-->
+            <div th:if="${errorMessages != null}" class="error-messages">
+                <ul>
+                    <li th:text="${errorMessages}"></li>
+                </ul>
+            </div>
+            <form th:action="@{/post}" method="post" th:object="${postModel}">
+                <div>
+                    <label>件名</label>
+                    <input type="text" th:field="*{title}">
+                </div>
+                <div>
+                    <label>本文</label>
+                    <textarea th:field="*{text}" rows="5" cols="33"></textarea>
+                </div>
+                <div>
+                    <label>カテゴリ</label>
+                    <input type="text" th:field="*{category}">
+                </div>
+                <input type="submit" value="投稿する">
+            </form>
         </div>
-        <div>
-            <label>本文</label>
-            <textarea th:field="*{text}" rows="5" cols="33"></textarea>
-        </div>
-        <div>
-            <label>カテゴリ</label>
-            <input type="text" th:field="*{category}">
-        </div>
-        <input type="submit" value="投稿する">
-    </form>
-</body>
+    </body>
 </html>
