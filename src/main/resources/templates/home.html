@@ -12,18 +12,17 @@
             <h1>ホーム画面</h1>
 
             <!--menu-->
-            <div>
+            <div class="menu_btn">
                 <!--新規投稿画面へのリンク-->
-                <a th:href="@{/post}">新規投稿画面</a>
+                <a th:href="@{/post}" class="btn">新規投稿画面</a>
                 <!--ユーザー管理画面へ遷移するリンク（本社総務人事部のみ遷移可能）-->
-                <div th:if="${buttonFlag == 'ON'}">
+                <div th:if="${buttonFlag == 'ON'}" class="btn">
                     <a th:href="@{user/list}">ユーザー管理画面</a>
                 </div>
                 <!--ログアウトボタン-->
-                <a th:href="@{/logout}">ログアウト</a>
+                <a th:href="@{/logout}" class="btn">ログアウト</a>
             </div>
-
-
+            
             <!--絞り込み入力-->
             <form th:action="@{/}" th:object="${messageSearchForm}" method="get">
                 <div class="search-form">

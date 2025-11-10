@@ -6,3 +6,30 @@
 
 h1 {
 }
+
+.menu_btn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+
+}
+.menu_btn .btn {
+    color: #000;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    width: calc((100% - 20px) / 3);
+    height: 30px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:
+}
+.btn a {
+    color: #000;
+    text-decoration: none;
+}
