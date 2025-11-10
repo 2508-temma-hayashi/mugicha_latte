@@ -31,5 +31,20 @@ h1 {
 }
 .btn a {
     color: #000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
+}
+
+.error-messages{
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+
+.error-messages ul {
+    padding: 0 10px;
+    list-style-type: none;
 }
