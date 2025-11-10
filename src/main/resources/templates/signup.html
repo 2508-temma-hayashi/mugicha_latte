@@ -2,60 +2,144 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/normalize.css}" rel="styleSheet">
+    <link th:href="@{/css/style.css}" rel="styleSheet">
+    <link th:href="@{/css/signup.css}" rel="styleSheet">
     <title>ユーザ登録</title>
 </head>
 <body>
-<h1>ユーザ登録</h1>
-    <!--エラーメッセージ-->
-    <div th:if="${errorMessages != null}" class="error-messages">
-        <ul>
-            <li th:text="${errorMessages}"></li>
-        </ul>
+    <div class="contents">
+        <h1>ユーザ登録</h1>
+        <!--エラーメッセージ-->
+        <div th:if="${errorMessages != null}" class="error-messages">
+            <ul>
+                <li th:text="${errorMessages}"></li>
+            </ul>
+        </div>
+
+        <form th:action="@{/signup}" method="post" th:object="${signupModel}">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            アカウント
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <input type="text" th:field="*{account}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            パスワード
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <input type="password" th:field="*{password}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            パスワード（確認用）
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <input type="password" th:field="*{passwordConfirm}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            氏名
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <input type="text" th:field="*{name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            支社
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <select th:field="*{branchId}">
+                                <option value="" th:selected="${branchId == null}">--支社を選択--</option>
+                                <option value="1" th:selected="${branchId == 1}">本社</option>
+                                <option value="2" th:selected="${branchId == 2}">支社A</option>
+                                <option value="3" th:selected="${branchId == 3}">支社B</option>
+                                <option value="4" th:selected="${branchId == 4}">支社C</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <!--フォームの名前-->
+                            部署
+                        </td>
+                        <td class="second">
+                            <!--フォームタグはここに-->
+                            <select th:field="*{departmentId}">
+                                <option value="" th:selected="${departmentId == null}">--部署を選択--</option>
+                                <option value="1" th:selected="${departmentId == 1}">総務人事部(本社のみ)</option>
+                                <option value="2" th:selected="${departmentId == 2}">情報管理部(本社のみ)</option>
+                                <option value="3" th:selected="${departmentId == 3}">営業部</option>
+                                <option value="4" th:selected="${departmentId == 4}">技術部</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="登録する">
+        </form>
+<!--        <form th:action="@{/signup}" method="post" th:object="${signupModel}">-->
+<!--            <div>-->
+<!--                <label>アカウント</label>-->
+<!--                <input type="text" th:field="*{account}">-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <label>パスワード</label>-->
+<!--                <input type="password" th:field="*{password}">-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <label>パスワード（確認用）</label>-->
+<!--                <input type="password" th:field="*{passwordConfirm}">-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <label>氏名</label>-->
+<!--                <input type="text" th:field="*{name}">-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <label>支社</label>-->
+<!--                <select th:field="*{branchId}">-->
+<!--                    <option value="" th:selected="${branchId == null}">&#45;&#45;支社を選択&#45;&#45;</option>-->
+<!--                    <option value="1" th:selected="${branchId == 1}">本社</option>-->
+<!--                    <option value="2" th:selected="${branchId == 2}">支社A</option>-->
+<!--                    <option value="3" th:selected="${branchId == 3}">支社B</option>-->
+<!--                    <option value="4" th:selected="${branchId == 4}">支社C</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <label>部署</label>-->
+<!--                <select th:field="*{departmentId}">-->
+<!--                    <option value="" th:selected="${departmentId == null}">&#45;&#45;部署を選択&#45;&#45;</option>-->
+<!--                    <option value="1" th:selected="${departmentId == 1}">総務人事部(本社のみ)</option>-->
+<!--                    <option value="2" th:selected="${departmentId == 2}">情報管理部(本社のみ)</option>-->
+<!--                    <option value="3" th:selected="${departmentId == 3}">営業部</option>-->
+<!--                    <option value="4" th:selected="${departmentId == 4}">技術部</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <input type="submit" value="登録する">-->
+<!--        </form>-->
     </div>
-
-    <form th:action="@{/signup}" method="post" th:object="${signupModel}">
-        <div>
-            <label>アカウント</label>
-            <input type="text" th:field="*{account}">
-        </div>
-
-        <div>
-            <label>パスワード</label>
-            <input type="password" th:field="*{password}">
-        </div>
-
-        <div>
-            <label>パスワード（確認用）</label>
-            <input type="password" th:field="*{passwordConfirm}">
-        </div>
-
-        <div>
-            <label>氏名</label>
-            <input type="text" th:field="*{name}">
-        </div>
-
-        <div>
-            <label>支社</label>
-            <select th:field="*{branchId}">
-                <option value="" th:selected="${branchId == null}">--支社を選択--</option>
-                <option value="1" th:selected="${branchId == 1}">本社</option>
-                <option value="2" th:selected="${branchId == 2}">支社A</option>
-                <option value="3" th:selected="${branchId == 3}">支社B</option>
-                <option value="4" th:selected="${branchId == 4}">支社C</option>
-            </select>
-        </div>
-
-        <div>
-            <label>部署</label>
-            <select th:field="*{departmentId}">
-                <option value="" th:selected="${departmentId == null}">--部署を選択--</option>
-                <option value="1" th:selected="${departmentId == 1}">総務人事部(本社のみ)</option>
-                <option value="2" th:selected="${departmentId == 2}">情報管理部(本社のみ)</option>
-                <option value="3" th:selected="${departmentId == 3}">営業部</option>
-                <option value="4" th:selected="${departmentId == 4}">技術部</option>
-            </select>
-        </div>
-        <input type="submit" value="登録する">
-    </form>
 </body>
 </html>

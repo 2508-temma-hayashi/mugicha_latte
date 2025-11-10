@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+tr {
+    height: 60px;
+}
+
+.first {
+    width: 30%;
+    background-color: #d3d3d3;
+    padding-left: 15px;
+    font-weight: 900;
+}
+.second {
+    width: 70%;
+    background-color: #fff;
+    padding: 0 15px;
+}
+.second input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.second select {
+    width: 100%;
+}
