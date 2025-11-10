@@ -1,0 +1,30 @@
+/*post.css*/
+.post-container {
+    margin: 0 auto;        /* 中央寄せ */
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px 0;  \
+    font-size: 16px;
+}
+
+input[type="text"],
+textarea {
+    padding: 5px 10px;
+    height: 30px;
+    width: 80%;           /* 親幅に合わせる */
+    font-size: 16px;
+    margin-bottom: 20px;   /* 要素間の間隔 */
+}
+
+textarea{
+    width: 483px;
+    height: 259px;
+    padding: 5px 10px;
+}
+
+.post-container .menu {
+    margin-bottom: 20px;
+}

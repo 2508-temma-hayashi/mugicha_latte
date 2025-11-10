@@ -3,31 +3,40 @@
     <head>
         <meta charset="UTF-8">
         <title>新規投稿画面</title>
+        <link rel="stylesheet" th:href="@{/css/normalize.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/post.css}">
     </head>
     <body>
         <div class="contents">
-            <h1>新規投稿画面</h1>
-            <!--エラーメッセージ-->
-            <div th:if="${errorMessages != null}" class="error-messages">
-                <ul>
-                    <li th:text="${errorMessages}"></li>
-                </ul>
+            <div class="post-container">
+                <h1>新規投稿画面</h1>
+                <!--メニューボタン-->
+                <div class="menu">
+                    <a th:href="@{/}">ホーム画面に戻る</a>
+                </div>
+                <!--エラーメッセージ-->
+                <div th:if="${errorMessages != null}" class="error-messages">
+                    <ul>
+                        <li th:text="${errorMessages}"></li>
+                    </ul>
+                </div>
+                <form th:action="@{/post}" method="post" th:object="${postModel}">
+                    <div>
+                        <label>件名</label>
+                        <input type="text" th:field="*{title}" placeholder="30文字以内で入力してください">
+                    </div>
+                    <div>
+                        <label>カテゴリ</label>
+                        <input type="text" th:field="*{category}" placeholder="10文字以内で入力してください">
+                    </div>
+                    <div>
+                        <label>本文</label>
+                        <textarea th:field="*{text}" rows="5" cols="33" placeholder="1000文字以内で入力してください"></textarea>
+                    </div>
+                    <input type="submit" value="投稿する">
+                </form>
             </div>
-            <form th:action="@{/post}" method="post" th:object="${postModel}">
-                <div>
-                    <label>件名</label>
-                    <input type="text" th:field="*{title}">
-                </div>
-                <div>
-                    <label>本文</label>
-                    <textarea th:field="*{text}" rows="5" cols="33"></textarea>
-                </div>
-                <div>
-                    <label>カテゴリ</label>
-                    <input type="text" th:field="*{category}">
-                </div>
-                <input type="submit" value="投稿する">
-            </form>
         </div>
     </body>
 </html>
