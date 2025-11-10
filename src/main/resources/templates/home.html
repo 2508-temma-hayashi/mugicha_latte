@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <link th:href="@{/css/normalize.css}" rel="styleSheet">
+        <link th:href="@{/css/style.css}" rel="styleSheet">
+        <link th:href="@{/css/home.css}" rel="styleSheet">
         <title>ホーム画面</title>
     </head>
     <body>
@@ -23,13 +26,21 @@
 
             <!--絞り込み入力-->
             <form th:action="@{/}" th:object="${messageSearchForm}" method="get">
-                <label>開始日：</label><input type="date" th:field="*{startDate}">
-                <label>終了日：</label><input type="date" th:field="*{endDate}">
-                <label>カテゴリー</label><input type="text" th:field="*{category}">
-                <button type="submit">絞り込み</button>
+                <div class="search-form">
+                    <div class="search-form-content">
+                        <div class="search-form-date">
+                            <div class="start"><label>開始日</label><input type="date" th:field="*{startDate}"></div>
+                            <div><label>終了日</label><input type="date" th:field="*{endDate}"></div>
+                        </div>
+                        <div class="search-form-category">
+                            <label>カテゴリー</label><input type="text" th:field="*{category}">
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="submit">絞り込み</button>
+                    </div>
+                </div>
             </form>
-            <hr/>
-
 
             <!--エラーメッセージ表示-->
             <div th:if="${errorMessages != null}" class="error-messages">
@@ -39,35 +50,41 @@
             </div>
 
             <!--投稿表示　件名・カテゴリー・本文・投稿日時・投稿者（氏名）-->
-            <div th:each="m : ${messageFormList}">
-                <p>
-                    <span th:text="${m.account}"></span>
-                    <span th:text="${#temporals.format(m.createdDate, 'yyyy/MM/dd HH:mm')}"></span>
-                </p>
-                <p>件名:<span th:text="${m.title}"></span></p>
-                <p>カテゴリー:<span th:text="${m.category}"></span></p>
-                <p th:text="${m.text}" style="white-space: pre-wrap;"></p><br/>
-                <div th:if="${m.userId == loginUser.id}">
-                    <form th:action="@{post/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
-                        <input type="hidden" name="id" th:value="${m.id}">
-                        <input type="submit" value="削除">
-                    </form>
+            <div th:each="m : ${messageFormList}" class="message-form-list">
+                <div class="message">
+                    <div class="title"><span th:text="${m.title}"></span></div>
+                    <div class="detail">
+                        <p class="account">
+                            <span th:text="${m.account}"></span>
+                            <span th:text="${#temporals.format(m.createdDate, 'yyyy/MM/dd HH:mm')}"></span>
+                        </p>
+                        <span th:text="${m.category}" class="category"></span>
+                        <div class="text" th:text="${m.text}" style="white-space: pre-wrap;"></div>
+                        <div th:if="${m.userId == loginUser.id}" class="delete-btn">
+                            <form th:action="@{post/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
+                                <input type="hidden" name="id" th:value="${m.id}">
+                                <input type="submit" value="削除">
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <!--コメント入力欄-->
                 <form th:action="@{/comment}" th:object="${commentForm}" method="post">
-                    <textarea th:field="*{text}"></textarea><br/>
-                    <input type="hidden" name=messageId th:value="${m.id}">
-                    <input type="submit" value="コメントする">
+                    <div class="comment-form">
+                        <textarea th:field="*{text}"></textarea><br/>
+                        <input type="hidden" name=messageId th:value="${m.id}">
+                        <input type="submit" value="コメントする">
+                    </div>
                 </form>
                 <!--コメント一覧-->
-                <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}">
-                    <div class="" style="display: flex;">
+                <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}" class="comment-list">
+                    <div class="account" style="display: flex;">
                         <p th:text="${c.User.name}"></p>
                         <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
                     </div>
-                    <pre th:text="${c.text}" style="white-space: pre-wrap;"></pre>
+                    <pre th:text="${c.text}" style="white-space: pre-wrap;" class="text"></pre>
                     <!--コメント削除ボタン-->
-                    <div th:if="${c.userId == loginUser.id}">
+                    <div th:if="${c.userId == loginUser.id}" class="delete-btn">
                         <form th:action="@{comment/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
                             <input type="hidden" name="id" th:value="${c.id}">
                             <input type="submit" value="削除">
