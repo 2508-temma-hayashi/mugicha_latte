@@ -1,78 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ホーム画面</title>
-</head>
-<body>
-    <h1>ホーム画面</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>ホーム画面</title>
+    </head>
+    <body>
+        <div class="contents">
+            <h1>ホーム画面</h1>
 
-    <!--menu-->
-    <div>
-        <!--新規投稿画面へのリンク-->
-        <a th:href="@{/post}">新規投稿画面</a>
-        <!--ユーザー管理画面へ遷移するリンク（本社総務人事部のみ遷移可能）-->
-        <div th:if="${buttonFlag == 'ON'}">
-            <a th:href="@{user/list}">ユーザー管理画面</a>
-        </div>
-        <!--ログアウトボタン-->
-        <a th:href="@{/logout}">ログアウト</a>
-    </div>
-
-
-    <!--絞り込み入力-->
-    <form th:action="@{/}" th:object="${messageSearchForm}" method="get">
-        <label>開始日：</label><input type="date" th:field="*{startDate}">
-        <label>終了日：</label><input type="date" th:field="*{endDate}">
-        <label>カテゴリー</label><input type="text" th:field="*{category}">
-        <button type="submit">絞り込み</button>
-    </form>
-    <hr/>
+            <!--menu-->
+            <div>
+                <!--新規投稿画面へのリンク-->
+                <a th:href="@{/post}">新規投稿画面</a>
+                <!--ユーザー管理画面へ遷移するリンク（本社総務人事部のみ遷移可能）-->
+                <div th:if="${buttonFlag == 'ON'}">
+                    <a th:href="@{user/list}">ユーザー管理画面</a>
+                </div>
+                <!--ログアウトボタン-->
+                <a th:href="@{/logout}">ログアウト</a>
+            </div>
 
 
-    <!--エラーメッセージ表示-->
-    <div th:if="${errorMessages != null}" class="error-messages">
-        <ul>
-            <li th:text="${errorMessages}"></li>
-        </ul>
-    </div>
-
-    <!--投稿表示　件名・カテゴリー・本文・投稿日時・投稿者（氏名）-->
-    <div th:each="m : ${messageFormList}">
-        <p>
-            <span th:text="${m.account}"></span>
-            <span th:text="${#temporals.format(m.createdDate, 'yyyy/MM/dd HH:mm')}"></span>
-        </p>
-        <p>件名:<span th:text="${m.title}"></span></p>
-        <p>カテゴリー:<span th:text="${m.category}"></span></p>
-        <p th:text="${m.text}" style="white-space: pre-wrap;"></p><br/>
-        <div th:if="${m.userId == loginUser.id}">
-            <form th:action="@{post/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
-                <input type="hidden" name="id" th:value="${m.id}">
-                <input type="submit" value="削除">
+            <!--絞り込み入力-->
+            <form th:action="@{/}" th:object="${messageSearchForm}" method="get">
+                <label>開始日：</label><input type="date" th:field="*{startDate}">
+                <label>終了日：</label><input type="date" th:field="*{endDate}">
+                <label>カテゴリー</label><input type="text" th:field="*{category}">
+                <button type="submit">絞り込み</button>
             </form>
-        </div>
-        <!--コメント入力欄-->
-        <form th:action="@{/comment}" th:object="${commentForm}" method="post">
-            <textarea th:field="*{text}"></textarea><br/>
-            <input type="hidden" name=messageId th:value="${m.id}">
-            <input type="submit" value="コメントする">
-        </form>
-        <!--コメント一覧-->
-        <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}">
-            <div class="" style="display: flex;">
-                <p th:text="${c.User.name}"></p>
-                <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
+            <hr/>
+
+
+            <!--エラーメッセージ表示-->
+            <div th:if="${errorMessages != null}" class="error-messages">
+                <ul>
+                    <li th:text="${errorMessages}"></li>
+                </ul>
             </div>
-            <pre th:text="${c.text}" style="white-space: pre-wrap;"></pre>
-            <!--コメント削除ボタン-->
-            <div th:if="${c.userId == loginUser.id}">
-                <form th:action="@{comment/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
-                    <input type="hidden" name="id" th:value="${c.id}">
-                    <input type="submit" value="削除">
+
+            <!--投稿表示　件名・カテゴリー・本文・投稿日時・投稿者（氏名）-->
+            <div th:each="m : ${messageFormList}">
+                <p>
+                    <span th:text="${m.account}"></span>
+                    <span th:text="${#temporals.format(m.createdDate, 'yyyy/MM/dd HH:mm')}"></span>
+                </p>
+                <p>件名:<span th:text="${m.title}"></span></p>
+                <p>カテゴリー:<span th:text="${m.category}"></span></p>
+                <p th:text="${m.text}" style="white-space: pre-wrap;"></p><br/>
+                <div th:if="${m.userId == loginUser.id}">
+                    <form th:action="@{post/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
+                        <input type="hidden" name="id" th:value="${m.id}">
+                        <input type="submit" value="削除">
+                    </form>
+                </div>
+                <!--コメント入力欄-->
+                <form th:action="@{/comment}" th:object="${commentForm}" method="post">
+                    <textarea th:field="*{text}"></textarea><br/>
+                    <input type="hidden" name=messageId th:value="${m.id}">
+                    <input type="submit" value="コメントする">
                 </form>
+                <!--コメント一覧-->
+                <div th:each="c : ${commentList}" th:if="${c.messageId == m.id}">
+                    <div class="" style="display: flex;">
+                        <p th:text="${c.User.name}"></p>
+                        <p th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></p>
+                    </div>
+                    <pre th:text="${c.text}" style="white-space: pre-wrap;"></pre>
+                    <!--コメント削除ボタン-->
+                    <div th:if="${c.userId == loginUser.id}">
+                        <form th:action="@{comment/delete}" method="post" onsubmit="return confirm('本当に削除しますか？');">
+                            <input type="hidden" name="id" th:value="${c.id}">
+                            <input type="submit" value="削除">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

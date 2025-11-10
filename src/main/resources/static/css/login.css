@@ -1,0 +1,38 @@
+/*Login.css*/
+
+.login-container {
+    display: flex;             /*中央寄せするため*/
+    flex-direction: column;     /*上のflexで横並びになってるので立て並びの設定*/
+    align-items: center;         /* 横方向中央寄せ */
+    margin: 50px 110px 0 110px;  /*枠の上と右と左にスペースを作る*/
+    padding-bottom: 30px;
+    border: 1px solid;
+}
+
+.error-messages{
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+
+.error-messages ul {
+    padding: 0 10px;
+    list-style-type: none;
+}
+
+label{
+    display: block;      /*ブロック化して改行する　display: inlineがデフォルト*/
+}
+
+
+input[type="text"],
+input[type="password"]{
+    height: 36px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    margin-top: 9px;
+    width: 223px;
+    height: 40px;
+}
+
