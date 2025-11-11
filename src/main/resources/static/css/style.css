@@ -8,27 +8,27 @@ h1 {
 }
 
 .menu_btn {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
+    display: flex;              /*横並びにするための指定。*/
+    justify-content: center;    /*横方向の中央寄せ*/
+    gap: 10px;                  /*子要素間のすき間を10px空ける*/
+    width: 100%;                /*親要素の幅いっぱいに広げる。*/
 
 }
 
 .menu_btn .btn {
-    color: #000;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    color: #000;
-    width: calc((100% - 20px) / 3);
+    color: #000;                /*テキストを黒にする*/
+    text-decoration: none;      /*下線を消す*/
+    background-color: #fff;     /*背景を白にする（白じゃなかった場合）*/
+    border: 1px solid #ccc;     /*グレーの枠線をつける。*/
+    border-radius: 5px;         /*角を少し丸く。*/
+    color: #000;                /**/
+    width: calc((100% - 20px) / 3); /*3つのボタンを横並びで、間のgap:10px×2ぶん(=20px)を引いて等分。*/
     height: 30px;
     font-size: 14px;
     display: flex;
-    justify-content: center;
+    justify-content: center;    /*ボタン内のテキストを完全中央（縦横）揃え。*/
     align-items: center;
-    background-color:
+    background-color:           /*背景色の指定*/
 }
 
 .btn a {
@@ -41,9 +41,14 @@ h1 {
     text-decoration: none;
 }
 
-.error-messages{
-    border: 1px solid;
-    margin-bottom: 10px;
+.error-messages {
+    color: #d32f2f;           /* 濃い赤（視認性の高い赤） */
+    background-color: #fdecea; /* 薄いピンクの背景*/
+    border: 1px solid #f5c6cb; /*枠線も淡い赤　solidは実線*/
+    border-radius: 4px;        /* 角を丸める */
+    padding: 8px 12px;         /* 余白 上下　左右*/
+    margin-bottom: 16px;       /* フォームとの間隔 「上」なら対応するのは margin-top*/
+    list-style-type: none;     /* 点（・）を消す */
 }
 
 .error-messages ul {

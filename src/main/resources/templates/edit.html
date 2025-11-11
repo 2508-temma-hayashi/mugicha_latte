@@ -19,7 +19,7 @@
         <!--エラーメッセージ-->
         <div th:if="${errorMessages != null}" class="error-messages">
             <ul>
-                <li th:text="${errorMessages}"></li>
+                <li th:each="msg : ${errorMessages}" th:text="${msg}"></li>
             </ul>
         </div>
 

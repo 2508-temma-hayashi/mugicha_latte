@@ -11,9 +11,10 @@
     <div class="contents">
         <h1>ユーザー登録</h1>
         <!--メニュー-->
-        <div class="menu_btn">
-            <a th:href="@{/user/list}" class="btn">ユーザー管理画面</a>
-            <a th:href="@{/}" class="btn">ホーム画面</a>
+        <div th:if="${errorMessages != null}" class="error-messages">
+            <ul>
+                <li th:each="msg : ${errorMessages}" th:text="${msg}"></li>
+            </ul>
         </div>
 
         <!--エラーメッセージ-->
