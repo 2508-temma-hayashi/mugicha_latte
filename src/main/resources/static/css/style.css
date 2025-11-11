@@ -47,7 +47,8 @@ h1 {
     border: 1px solid #f5c6cb; /*枠線も淡い赤　solidは実線*/
     border-radius: 4px;        /* 角を丸める */
     padding: 8px 12px;         /* 余白 上下　左右*/
-    margin-bottom: 16px;       /* フォームとの間隔 「上」なら対応するのは margin-top*/
+    margin-bottom: 10px;       /* フォームとの間隔 「上」なら対応するのは margin-top*/
+    margin-top:10px;
     list-style-type: none;     /* 点（・）を消す */
 }
 
