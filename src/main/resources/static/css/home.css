@@ -97,6 +97,7 @@
 label {
     display: block;
     font-size: 16px;
+    margin-bottom: 5px;
 }
 .start {
     margin-bottom: 10px;
@@ -108,10 +109,4 @@ label {
 }
 .button {
     text-align: center;
-}
-.search-form-content input {
-    height: 24px;
-}
-.search-form-content select {
-    height: 24px;
 }

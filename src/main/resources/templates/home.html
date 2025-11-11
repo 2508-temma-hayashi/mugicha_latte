@@ -70,7 +70,7 @@
                 <!--コメント入力欄-->
                 <form th:action="@{/comment}" th:object="${commentForm}" method="post">
                     <div class="comment-form">
-                        <textarea th:field="*{text}" placeholder="500文字以内で入力してください"></textarea><br/>
+                        <textarea th:field="*{text}" placeholder="500文字以内で入力してください" rows="5" cols="33"></textarea><br/>
                         <input type="hidden" name=messageId th:value="${m.id}">
                         <input type="submit" value="コメントする">
                     </div>
