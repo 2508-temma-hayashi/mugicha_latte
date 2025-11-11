@@ -1,6 +1,7 @@
 /*post.css*/
 .post-container {
     width: 100%;
+    margin-bottom: 30px;
 }
 
 label {
@@ -12,7 +13,6 @@ label {
 input[type="text"],
 textarea {
     padding: 5px 10px;
-    height: 30px;
     width: 100%;           /* 親幅に合わせる */
     font-size: 16px;
     margin-bottom: 20px;   /* 要素間の間隔 */
