@@ -12,9 +12,10 @@
             <div class="post-container">
                 <h1>新規投稿画面</h1>
                 <!--メニューボタン-->
-                <div class="menu">
-                    <a th:href="@{/}">ホーム画面に戻る</a>
+                <div class="menu_btn">
+                    <a th:href="@{/}" class="btn">ホーム画面に戻る</a>
                 </div>
+
                 <!--エラーメッセージ-->
                 <div th:if="${errorMessages != null}" class="error-messages">
                     <ul>
