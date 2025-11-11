@@ -51,7 +51,7 @@
                                       onsubmit="return confirm('本当に変更していいですか？');">
                                     <input type="hidden" name="id" th:value="${user.id}">
                                     <button type="submit" th:disabled="${user.id == loginUser.id}"
-                                            th:text="${user.isStopped == 0 ? '復活' : '停止'}"></button>
+                                            th:text="${user.isStopped == 0 ? '停止' : '復活'}"></button>
                                 </form>
                             </div>
                         </div>
