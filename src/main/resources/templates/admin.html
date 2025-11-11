@@ -40,7 +40,7 @@
                     <td th:text="${user.departmentName}"></td>
                     <td>
                         <div class="flex">
-                            <p th:text="${user.isStopped == 0 ? '停止' : '稼働'}"></p>
+                            <p th:text="${user.isStopped == 0 ? '稼働' : '停止'}"></p>
                             <!--編集ボタン-->
                             <div>
                                 <a th:href="@{/user/edit/{id}(id=${user.id})}">

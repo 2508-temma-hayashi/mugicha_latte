@@ -31,7 +31,7 @@ public class LoginService {
         if (userList.isEmpty()) {
             return false;
         }
-        else if (userList.get(0).getIsStopped() == 0) {
+        else if (userList.get(0).getIsStopped() == 1) {
             return false;
         } else {
             return true;
